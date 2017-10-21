@@ -19,7 +19,7 @@ build:
   script: python setup.py install --standard-lib
 
 requirements:
-  build:
+  host:
     - python
     - setuptools
 
