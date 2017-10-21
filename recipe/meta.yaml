@@ -23,8 +23,8 @@ build:
 
 requirements:
   host:
-    - setuptools
     - python
+    - setuptools
 
   run:
     - python
