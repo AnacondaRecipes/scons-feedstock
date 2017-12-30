@@ -10,9 +10,11 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - 0001-Do-not-add-unnormalised-PATH-entries.patch
 
 build:
-  number: 0
+  number: 1
   script: python setup.py install --standard-lib
 
 requirements:
@@ -53,4 +55,6 @@ about:
 
 extra:
   recipe-maintainers:
+    - mingwandroid
+    - nehaljwani
     - stuertz

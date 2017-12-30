@@ -1,0 +1,17 @@
+diff -urN scons-3.0.0.orig/script/scons.bat scons-3.0.0/script/scons.bat
+--- scons-3.0.0.orig/script/scons.bat	2017-12-30 23:09:29.000000000 +0000
++++ scons-3.0.0/script/scons.bat	2017-12-30 23:12:04.000000000 +0000
+@@ -16,7 +16,12 @@
+ :WinNT
+ setlocal
+ @REM ensure the script will be executed with the Python it was installed for
+-set path=%~dp0;%~dp0..;%path%
++@REM use pushd and %CD% instead of adding %~dp0.. to PATH due to:
++@REM https://bugs.python.org/issue32457 which, even if CPython were to fix
++@REM could cause problems for other software that does not expect '..' in PATH
++pushd %~dp0..
++set path=%~dp0;%CD%;%path%
++popd
+ @REM try the script named as the .bat file in current dir, then in Scripts subdir
+ set scriptname=%~dp0%~n0.py
+ if not exist "%scriptname%" set scriptname=%~dp0Scripts\%~n0.py
