@@ -10,9 +10,6 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    # patch required to fix #2
-    - scons.bat.patch  # [win]
 
 build:
   # be careful of using "noarch: python": we have had trouble in the past in a single platform (#2)
@@ -33,12 +30,12 @@ test:
   imports:
     - SCons
     - SCons.Node
-    - SCons.Options
     - SCons.Platform
     - SCons.Scanner
     - SCons.Script
     - SCons.Tool
     - SCons.Tool.MSCommon
+    - SCons.Tool.clangCommon
     - SCons.Tool.docbook
     - SCons.Tool.packaging
     - SCons.Variables
