@@ -12,7 +12,7 @@ source:
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - scons = SCons.Script.Main:main
     - sconsign = SCons.Utilities.sconsign:main
@@ -25,10 +25,14 @@ requirements:
   host:
     - pip
     - python
+    - setuptools
+    - wheel
   run:
     - python
 
 test:
+  requires:
+    - pip
   imports:
     - SCons
     - SCons.Node
@@ -45,9 +49,10 @@ test:
     - scons --help
     - sconsign --help
     - scons-configure-cache --help
+    - pip check
 
 about:
-  home: http://www.scons.org/
+  home: https://www.scons.org/
   license: MIT
   license_family: MIT
   license_file: LICENSE
@@ -58,7 +63,7 @@ about:
     substitute for the classic Make utility with integrated functionality
     similar to autoconf/automake and compiler caches such as ccache. In short,
     SCons is an easier, more reliable and faster way to build software.
-  doc_url: http://scons.org/documentation.html
+  doc_url: https://scons.org/documentation.html
   dev_url: https://github.com/SCons/scons
 
 extra:
