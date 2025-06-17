@@ -13,6 +13,7 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
   entry_points:
     - scons = SCons.Script.Main:main
     - sconsign = SCons.Utilities.sconsign:main
