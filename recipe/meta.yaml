@@ -1,14 +1,13 @@
 {% set name = "scons" %}
-{% set version = "4.9.1" %}
+{% set version = "4.10.1" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: bacac880ba2e86d6a156c116e2f8f2bfa82b257046f3ac2666c85c53c615c338
+  sha256: 99c0e94a42a2c1182fa6859b0be697953db07ba936ecc9817ae0d218ced20b15
 
 build:
   number: 0
@@ -17,16 +16,13 @@ build:
     - scons = SCons.Script.Main:main
     - sconsign = SCons.Utilities.sconsign:main
     - scons-configure-cache = SCons.Utilities.ConfigureCache:main
+  skip: true  # [py<37]
 
 requirements:
-  build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
   host:
     - pip
     - python
-    - setuptools
-    - wheel
+    - setuptools >=77.0
   run:
     - python
 
@@ -52,7 +48,7 @@ test:
     - pip check
 
 about:
-  home: https://www.scons.org/
+  home: https://www.scons.org
   license: MIT
   license_family: MIT
   license_file: LICENSE
